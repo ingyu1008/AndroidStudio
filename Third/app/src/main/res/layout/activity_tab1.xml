@@ -6,23 +6,100 @@
     android:layout_height="match_parent"
     tools:context=".Tab1Activity"
     android:orientation="vertical">
-<!--
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:text="@string/textView_txt0"/>
 
-        /!-->
-
-    <Button
-        android:id="@+id/btn0"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_txt0"
-        android:layout_marginTop="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp">
+
+        <Button
+            android:id="@+id/btn_menu_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_menu_txt0" />
+
+        <Button
+            android:id="@+id/btn_menu_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_menu_txt1"
+            android:layout_toRightOf="@id/btn_menu_0"
+            android:layout_toEndOf="@id/btn_menu_0"/>
+
+        <Button
+            android:id="@+id/btn_menu_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_menu_txt2"
+            android:layout_toRightOf="@id/btn_menu_1"
+            android:layout_toEndOf="@id/btn_menu_1"/>
+
+        <Button
+            android:id="@+id/btn_menu_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_menu_txt3"
+            android:layout_below="@id/btn_menu_0"/>
+
+        <Button
+            android:id="@+id/btn_menu_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_menu_txt4"
+            android:layout_below="@id/btn_menu_1"
+            android:layout_toRightOf="@id/btn_menu_3"
+            android:layout_toEndOf="@id/btn_menu_3"/>
+
+        <Button
+            android:id="@+id/btn_menu_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_menu_2"
+            android:layout_toRightOf="@id/btn_menu_4"
+            android:layout_toEndOf="@id/btn_menu_4"
+            android:text="@string/btn_menu_txt5"/>
+
+        <Button
+            android:id="@+id/btn_menu_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_menu_3"
+            android:text="@string/btn_menu_txt6"/>
+        <Button
+            android:id="@+id/btn_menu_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_menu_4"
+            android:layout_toRightOf="@id/btn_menu_6"
+            android:layout_toEndOf="@id/btn_menu_6"
+            android:text="@string/btn_menu_txt7"/>
+        <Button
+            android:id="@+id/btn_menu_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_menu_5"
+            android:layout_toRightOf="@id/btn_menu_7"
+            android:layout_toEndOf="@id/btn_menu_7"
+            android:text="@string/btn_menu_txt8"/>
+
+        <Button
+            android:id="@+id/btn0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_txt0"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
 </LinearLayout>
