@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Third</string>
+    <string name="app_name">GUAVA</string>
+    <string name="btn_txt0">메인</string>
+    <string name="btn_txt1">탭1</string>
+    <string name="btn_txt2">탭2</string>
+    <string name="btn_txt3">탭3</string>
+    <string name="textView_txt0">Acitivity 1</string>
+    <string name="textView_txt1">Acitivity 2</string>
+    <string name="textView_txt2">Acitivity 3</string>
 </resources>
