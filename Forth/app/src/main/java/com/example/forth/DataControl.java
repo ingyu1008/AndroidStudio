@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class DataControl {
 
-    public static String FILENAME = "savedData.dat";
+    public static String FILENAME = "savedData_4.dat";
 
     public static void writeData(ArrayList<Long> arrayList, Context context){
 
