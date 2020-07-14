@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
@@ -34,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lists[0] = findViewById(R.id.list0);
 
         arrayList = FileHelper.readData(this);
-
         arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,arrayList);
+
         lists[0].setAdapter(arrayAdapter);
 
         buttons[0].setOnClickListener(this);
