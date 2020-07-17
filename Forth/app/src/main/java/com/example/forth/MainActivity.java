@@ -70,9 +70,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         try {
             elapsedTime = TimeControl.updateArrayAdapter(arrayList, arrayAdapter, arrayList.get(2), arrayList.get(0),this,true);
-        } catch(NullPointerException e){
-            e.printStackTrace();
-            elapsedTime = 0;
         } catch(IndexOutOfBoundsException e){
             e.printStackTrace();
             elapsedTime = 0;
@@ -80,8 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         try{
             textView.setText(String.format("%d / 200", arrayList.get(0)));
-        } catch (NullPointerException e){
-            e.printStackTrace();
         } catch (IndexOutOfBoundsException e){
             textView.setText(String.format("%d / 200", 200));
             arrayList.add(200L);
