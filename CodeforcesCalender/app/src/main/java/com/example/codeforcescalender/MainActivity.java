@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -20,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public TableLayout tableLayout;
     public ArrayList<TableRow> rows = new ArrayList<>();
     public ArrayList<TextView> tvs = new ArrayList<>();
+    private final String[] diff = {"Very Easy", "Easy", "Normal", "Hard","Very Hard"};
 
     public ArrayList<String> spinnerArray = new ArrayList<>();
 
@@ -58,26 +62,84 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         try {
-            updateTable(thread);
+            init(thread);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private synchronized void updateTable(Thread thread) throws JSONException {
+    private synchronized void init(Thread thread) throws JSONException {
         tableLayout.removeAllViews();
         tvs.clear();
         rows.clear();
         thread.start();
         while(thread.isAlive()){
         }
-        addNewRows();
+        updateSpinner();
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selected = spinnerArray.get(i);
+                try {
+                    fillTable(selected);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+    private String parsePhase(String s){
+        switch(s){
+            case "BEFORE":
+                return "대회 시작 전 입니다.";
+            case "CODING":
+                return "대회 중 입니다.";
+            case "PENDING_SYSTEM_TEST":
+                return "참가자들이 '맞왜틀!!' 중 입니다";
+            case "SYSTEM_TEST":
+                return "시스텟을 돌리는 중 입니다.";
+            case "FINISHED":
+                return "대회가 종료되었습니다.";
+            default:
+                return s;
+        }
+    }
+
+    private void fillTable(String name) throws JSONException {
+        tableLayout.removeAllViews();
+        tvs.clear();
+        rows.clear();
+        JSONObject jsonObject = new JSONObject(s[0]);
+        JSONArray contests = jsonObject.getJSONArray("result");
+        for(int i = 0; i < contests.length(); i++){
+            JSONObject me = new JSONObject(contests.get(i).toString());
+            if(!me.getString("name").equals(name))continue;
+            addRow(name);
+            addRow(parsePhase(me.getString("phase")));
+            addRow("");
+            if(me.getString("phase").equals("BEFORE")) {
+                addRow("대회는 " + me.getInt("durationSeconds") / 60 + "분간 진행될 예정입니다.");
+                addRow("");
+                addRow("대회 시작 시간은 다음과 같습니다");
+                addRow(new Date(me.getLong("startTimeSeconds") * 1000L).toString());
+            }
+
+            break;
+        }
     }
 
     private void addRow(String content){
         TextView tv = new TextView(this);
+        tv.setWidth(tableLayout.getWidth());
+        tv.setSingleLine(false);
+        tv.setMaxLines(2);
         tv.setText(content);
-        tv.setTextSize(24);
+        tv.setTextSize(20);
         tv.setGravity(Gravity.START);
         TableRow tr = new TableRow(this);
         tr.addView(tv);
@@ -86,15 +148,13 @@ public class MainActivity extends AppCompatActivity {
         rows.add(tr);
     }
 
-    private void addNewRows() throws JSONException {
+    private void updateSpinner() throws JSONException {
         JSONObject jsonObject = new JSONObject(s[0]);
         addRow(jsonObject.getString("status"));
         JSONArray contests = jsonObject.getJSONArray("result");
         for(int i = 0; i < contests.length(); i++){
             JSONObject me = new JSONObject(contests.get(i).toString());
-            if(me.getString("phase").equals("FINISHED"))break;
             spinnerArray.add(me.getString("name"));
-            addRow(me.getString("name"));
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item,spinnerArray
